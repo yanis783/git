@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIT</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | À personnaliser</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #131a2e;
+      --text: #ecf0ff;
+      --muted: #a8b0cc;
+      --accent: #6ee7ff;
+      --accent-2: #7c8cff;
+      --border: #283252;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top right, #1a2550 0%, var(--bg) 45%);
+      line-height: 1.5;
+    }
+    .container { width: min(1080px, 92%); margin: 0 auto; }
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(10px);
+      background: color-mix(in oklab, var(--bg) 72%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.8rem 0;
+    }
+    .brand { font-weight: 700; letter-spacing: 0.3px; }
+    .links a { color: var(--muted); text-decoration: none; margin-left: 1rem; font-size: 0.95rem; }
+    .links a:hover { color: var(--text); }
+
+    .hero { padding: 4rem 0 2.5rem; display: grid; gap: 2rem; grid-template-columns: 1.2fr 1fr; align-items: start; }
+
+    .hero-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 18px;
+      object-fit: cover;
+      border: 2px solid var(--border);
+      margin-bottom: 0.8rem;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.3);
+    }
+    .pill {
+      display: inline-block; border: 1px solid var(--border); border-radius: 999px;
+      color: var(--muted); padding: 0.35rem 0.8rem; font-size: 0.85rem;
+    }
+    h1 { font-size: clamp(2rem, 5vw, 3.4rem); margin: 0.8rem 0; line-height: 1.08; white-space: pre-line; }
+    .subtitle { color: var(--muted); max-width: 65ch; }
+    .cta { margin-top: 1.2rem; display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .btn {
+      border: 1px solid var(--border);
+      color: var(--text); text-decoration: none;
+      padding: 0.62rem 1rem; border-radius: 10px;
+      display: inline-block;
+      background: #182142;
+    }
+    .btn.primary { background: linear-gradient(95deg, var(--accent-2), #5acbff); color: #040814; border: 0; font-weight: 700; }
+
+    .dashboard {
+      align-self: start;
+      background: color-mix(in oklab, var(--card) 90%, black);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1rem 1.1rem 1.2rem;
+    }
+    .dashboard h3 { margin: 0 0 0.8rem; font-size: 1.1rem; }
+    .dashboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; }
+    .dashboard-item { padding: 0.55rem; border: 1px solid var(--border); border-radius: 10px; background: #101a33; }
+    .dashboard-item .value { font-size: 1.2rem; font-weight: 700; color: #3de6ba; }
+    .dashboard-item .label { color: var(--muted); font-size: 0.82rem; }
+    .card {
+      background: color-mix(in oklab, var(--card) 88%, black);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem;
+    }
+    .kpi { font-size: 1.3rem; font-weight: 700; }
+    .kpi-label { color: var(--muted); font-size: 0.85rem; }
+
+    section { padding: 1.25rem 0 0.6rem; }
+    h2 { margin-bottom: 0.8rem; }
+    .grid-2 { display: grid; gap: 1rem; grid-template-columns: repeat(2, 1fr); }
+    ul { margin-top: 0.4rem; padding-left: 1.1rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      font-size: 0.8rem; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 999px; padding: 0.28rem 0.65rem;
+    }
+    .project { display: grid; gap: 0.65rem; }
+    .project h3 { margin: 0; }
+    .long-text { white-space: pre-line; color: var(--muted); margin-top: 0.6rem; text-align: justify; }
+
+    .skills-subtitle { color: var(--muted); margin-top: -0.2rem; margin-bottom: 1rem; }
+    .skills-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .skill-card h3 { margin-top: 0; margin-bottom: 0.7rem; }
+    .skill-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.45rem; }
+    .skill-list li { display: flex; align-items: center; gap: 0.5rem; color: var(--text); }
+    .skill-icon { width: 1.25rem; text-align: center; }
+    #presentation-personnelle, #pourquoi-data, #competences-qualites { display: grid; gap: 1rem; }
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 1.8rem;
+      padding: 1.2rem 0 2rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero, .grid-2, .skills-grid { grid-template-columns: 1fr; }
+      .links { display: none; }
+    }
+  </style>
+</head>
+<body>
+    
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand" id="nameNav">Ton Nom</div>
+      <div class="links">
+        <a href="#presentation-personnelle">Qui suis-je ?</a>
+        <a href="#pourquoi-data">Pourquoi la data ?</a>
+        <a href="#competences-qualites">Compétences & qualités</a>
+        <a href="#competences">Outils Data</a>
+        <a href="#projets">Projets</a>
+        <a href="#parcours">Parcours</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="container hero">
+    <div>
+      <img class="hero-photo" id="heroPhoto" src="" alt="Photo de Yanis Dhaime" />
+      <span class="pill" id="headline">Ton métier / statut</span>
+      <h1 id="title">Data. Analytics. Engineering.</h1>
+      <p class="subtitle" id="intro">Présente ici qui tu es en 2-3 lignes: ton profil, ta spécialité et ce que tu recherches.</p>
+      <div class="cta">
+        <a class="btn primary" id="cvBtn" href="#">Télécharger le CV</a>
+        <a class="btn" id="linkedinBtn" href="#">LinkedIn</a>
+        <a class="btn" href="#projets">Voir les projets</a>
+      </div>
+    </div>
+    <aside class="dashboard">
+      <h3>Compétences clés</h3>
+      <div class="dashboard-grid" id="dashboardMetrics"></div>
+    </aside>
+  </header>
+
+  <main class="container">
+    <section id="presentation-personnelle">
+      <h2>Qui suis-je ?</h2>
+      <div class="card">
+        <p id="personalPresentation" class="long-text"></p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <strong>Centres d'intérêt</strong>
+          <ul id="interests"></ul>
+        </div>
+        <div class="card">
+          <strong>Langues</strong>
+          <ul id="languages"></ul>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Objectifs</h3>
+        <p id="goalsText" class="long-text"></p>
+      </div>
+    </section>
+
+    <section id="pourquoi-data">
+      <h2>Pourquoi la science des données ?</h2>
+      <div class="card">
+        <p id="whyDataScience" class="long-text"></p>
+      </div>
+    </section>
+
+    <section id="competences-qualites">
+      <h2>Compétences et qualités</h2>
+      <div class="card">
+        <h3>Mes compétences</h3>
+        <p id="competenceText" class="long-text"></p>
+      </div>
+      <div class="card">
+        <h3>Mes qualités</h3>
+        <p id="qualitiesText" class="long-text"></p>
+      </div>
+    </section>
+
+    <section id="competences">
+      <h2>Compétences Data</h2>
+      <p class="skills-subtitle">Logiciels & outils maîtrisés.</p>
+      <div class="skills-grid">
+        <article class="card skill-card">
+          <h3>Programmation</h3>
+          <ul class="skill-list" id="skillsProgramming"></ul>
+        </article>
+        <article class="card skill-card">
+          <h3>BI & Data</h3>
+          <ul class="skill-list" id="skillsBiData"></ul>
+        </article>
+        <article class="card skill-card">
+          <h3>Bureautique</h3>
+          <ul class="skill-list" id="skillsOffice"></ul>
+        </article>
+        <article class="card skill-card">
+          <h3>Méthodes</h3>
+          <ul class="skill-list" id="skillsMethods"></ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="projets">
+      <h2>Projets</h2>
+      <div class="grid-2" id="projects"></div>
+    </section>
+
+    <section id="parcours">
+      <h2>Parcours</h2>
+      <div class="grid-2" id="experience"></div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="card">
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        <p><strong>Téléphone:</strong> <span id="phone"></span></p>
+        <p><strong>Localisation:</strong> <span id="location"></span></p>
+        <p><strong>Permis:</strong> <span id="permits"></span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span id="copyright"></span>
+    </div>
+  </footer>
+
+  <script>
+    const profile = {
+      name: "Yanis Dhaime",
+      headline: "Étudiant en BUT Data Science · 20 ans",
+      title: "Data. \nAnalytics.\nEngineering.",
+      intro: "Étudiant en sciences des données, je transforme les données en informations utiles pour comprendre, analyser et décider.",
+      photoUrl: "yanis-photo.jpg",
+      cvUrl: "#",
+      linkedinUrl: "https://www.linkedin.com/in/yanis-dhaime-3b4a80296",
+      dashboard: {
+        metrics: [
+          { value: "85%", label: "Python / SQL" },
+          { value: "78%", label: "Statistiques" },
+          { value: "82%", label: "DataViz / BI" },
+          { value: "80%", label: "Communication" }
+        ],
+      },
+      interests: ["Sport", "Voyages", "Technologie"],
+      goalsText: `Mon objectif est de travailler plus tard dans le domaine de la science des données, par exemple comme data analyst ou data scientist. Ce qui m’intéresse dans ces métiers, c’est le fait d’analyser des données pour mieux comprendre une situation et aider les entreprises à prendre de bonnes décisions.
+À court terme, je veux continuer à progresser pendant ma formation en BUT Science des Données. Je souhaite améliorer mes compétences en analyse de données, en statistiques et en visualisation. Pour cela, je m’appuie sur les projets réalisés en cours, mais aussi sur des projets que je fais seul pour m’entraîner et mieux comprendre les méthodes utilisées.
+À moyen terme, j’aimerais continuer mes études pour me spécialiser davantage dans la data. Mon objectif est d’avoir un bon niveau pour être à l’aise dans un environnement professionnel et pouvoir travailler sur des projets plus complexes.
+Je suis quelqu’un de très ambitieux et, à long terme, je souhaite créer ma propre entreprise dans le domaine de la data. Mon idée serait de proposer des services d’analyse de données aux entreprises. Par exemple, je pourrais analyser leurs données pour les aider à comprendre leurs résultats, améliorer leur organisation ou prendre de meilleures décisions.
+J’aimerais aussi accompagner les entreprises dans leurs projets en leur proposant des solutions simples et adaptées à leurs besoins. Le fait de pouvoir travailler avec différents types d’entreprises et sur des sujets variés me motive beaucoup.
+Enfin, je veux continuer à développer mon autonomie, mon sérieux et ma capacité à travailler avec les autres, afin de réussir mon projet et m’intégrer facilement dans le monde professionnel.`,
+      personalPresentation: `Je suis Yanis Dhaime et je suis actuellement en 2ᵉ année de BUT Science des Données à l’IUT Sorbonne Paris Nord de Villetaneuse. Cette formation me permet de développer mes compétences en analyse de données, en statistiques et en traitement de données. J’y apprends aussi à mieux comprendre les données et à les utiliser de façon utile pour répondre à des problématiques concrètes.
+J’aime particulièrement l’analyse de données, la visualisation et le fait de pouvoir transformer des données brutes en résultats analysables. J’apprécie aussi les outils comme Python, SQL, R et Excel, que j’utilise dans le cadre de mes projets universitaires. Ce qui m’intéresse dans la science des données, c’est autant le côté technique que le fait d’aider à mieux comprendre une situation et à prendre de meilleures décisions.
+Je souhaite devenir plus tard data analyst ou data scientist. Ces deux métiers m’intéressent car ils permettent de travailler dans des secteurs très variés, ce qui est pour moi très motivant. J’aime aussi l’idée d’exercer un métier utile, qui combine réflexion, analyse et travail avec les autres.
+Pour cela, j’essaie de développer au maximum mes compétences pendant ma formation, à travers les projets réalisés en cours, mais aussi en travaillant de façon autonome sur des projets personnels. J’ai également effectué un stage chez RBF Consulting, où j’ai travaillé sur l’analyse de données et la création de tableaux de bord, ce qui m’a permis de découvrir le monde professionnel. Cette démarche me permet de progresser, de gagner en autonomie et de construire peu à peu mon projet d’avenir.`,
+      whyDataScience: `J’ai choisi la science des données car c’est un domaine qui me plaît à la fois pour son côté technique, analytique et concret. Ce que j’aime, c’est le fait de travailler à partir de données pour mieux comprendre une situation, repérer des tendances et aider à prendre de bonnes décisions. Je trouve intéressant de pouvoir transformer des données brutes en analyse concrète.
+Pendant ma formation, j’ai découvert plusieurs outils et méthodes qui m’ont vraiment donné envie d’aller plus loin dans ce domaine. Les projets que j’ai réalisés en cours, mais aussi ceux que j’ai commencés de manière plus autonome, m’ont permis de voir que la science des données demande de la réflexion, de la rigueur et de la curiosité, ce qui correspond bien à ma manière de travailler.
+Ce qui me motive aussi beaucoup, c’est la liberté qu’offre ce domaine. La science des données est présente dans presque tous les secteurs : la santé, le sport, la finance, le commerce, les transports, l’environnement et beaucoup d’autres. Cela veut dire qu’on peut travailler sur des sujets très différents et dans des domaines variés, ce qui rend ce métier motivant et intéressant sur le long terme.
+J’aime aussi le fait que la data ne soit pas seulement un domaine technique. Il y a aussi un côté humain, car il faut comprendre les besoins des autres, échanger avec eux et trouver des solutions utiles. Comme j’aime parler avec les gens, cela me plaît beaucoup.
+Enfin, la science des données me correspond car c’est un domaine en évolution, avec beaucoup d’opportunités, dans lequel on continue toujours à apprendre. C’est pour toutes ces raisons que je souhaite poursuivre dans cette voie.`,
+      competenceText: `Au cours de ma formation en BUT Science des Données, j’ai développé plusieurs compétences en analyse et en traitement des données. Je suis capable de collecter, nettoyer et analyser des données pour en tirer des informations utiles. Pendant certains projets universitaires, comme une étude sur les catastrophes climatiques ou une analyse statistique de données médicales, j’ai appris à travailler sur des bases de données et à réaliser des analyses statistiques pour mieux comprendre les résultats.
+Je maîtrise également plusieurs outils utilisés dans le domaine de la data, comme Python, R, SQL et Excel. Ces outils me permettent de manipuler des données, de réaliser des analyses et de créer des visualisations graphiques pour rendre les résultats plus compréhensibles.
+J’ai aussi appris à créer des tableaux de bord pour présenter les résultats d’une analyse de manière claire. Par exemple, lors de mon stage et de certains projets, j’ai réalisé des visualisations et des graphiques afin de faciliter la lecture et l’interprétation des données.`,
+      qualitiesText: `Je suis une personne organisée, rigoureuse, autonome, sérieuse et à l’écoute. J’ai notamment développé une partie de ces qualités en créant une société de livraison de nourriture. Cette expérience m’a demandé de bien m’organiser, de gérer plusieurs tâches, de prendre des initiatives et de travailler de façon autonome. Elle m’a aussi appris à être rigoureux, car il fallait faire attention aux détails et assurer un service sérieux et efficace.
+J’ai aussi développé mon côté sérieux et à l’écoute grâce à mon engagement bénévole dans l’association Le Vivre Ensemble, qui aide les personnes dans le besoin. Cette expérience m’a permis d’être au contact des autres, de mieux comprendre leurs difficultés et d’apprendre à adapter mon comportement selon les situations. Elle a renforcé chez moi le sens du relationnel, de l’écoute et de la responsabilité.
+Ces expériences m’ont permis de développer des qualités utiles aussi bien dans mes études que dans mes projets personnels et professionnels.`,
+      languages: ["Français — C2", "Anglais — B2", "Allemand — B2"],
+      skills: {
+        programming: [
+          { icon: "🐍", label: "Python" },
+          { icon: "📘", label: "R" },
+          { icon: "🗃️", label: "SQL" },
+          { icon: "🧩", label: "MetaBase" }
+        ],
+        biData: [
+          { icon: "📊", label: "Power BI + DAX" },
+          { icon: "📈", label: "Excel" },
+          { icon: "🗂️", label: "Access" },
+          { icon: "🧱", label: "HTML / CSS" }
+        ],
+        office: [
+          { icon: "🖥️", label: "PowerPoint" },
+          { icon: "📁", label: "Pack Office" },
+          { icon: "📋", label: "Project" },
+          { icon: "🧾", label: "Reporting (Excel)" }
+        ],
+        methods: [
+          { icon: "📐", label: "Statistiques" },
+          { icon: "📏", label: "Régressions" },
+          { icon: "⏱️", label: "Séries temporelles" },
+          { icon: "🔮", label: "Prévision" }
+        ]
+      },
+      projects: [
+        {
+          title: "Étude sur les catastrophes climatiques dans le monde (Nov. 2024 — Jan. 2025)",
+          description: "Collecte, nettoyage et création de bases de données, analyses statistiques descriptives, visualisations graphiques et rédaction de rapports techniques.",
+          tags: ["MetaBase", "PostgreSQL", "SQL"],
+          link: "#"
+        },
+        {
+          title: "Régression linéaire et analyse statistique de données médicales (Mai 2025 — Juin 2025)",
+          description: "Analyse exploratoire, tests univariés et bivariés, corrélations, régression linéaire, visualisation et interprétation statistique pour un rapport décisionnel.",
+          tags: ["R", "Régression", "Statistiques"],
+          link: "#"
+        }
+      ],
+      experience: [
+        { title: "BUT Science des données — 2ème année", detail: "IUT Sorbonne Paris | Villetaneuse (2024 — 2027)" },
+        { title: "Formation Développeur Web Fullstack", detail: "3W Academy (2023 — 2024)" },
+        { title: "Baccalauréat STID", detail: "Lycée Le Corbusier, Poissy — Mention Bien (2022 — 2023)" },
+        { title: "Stage Data — RBF Consulting", detail: "Avril — Juillet 2024 : analyse de données, création de tableaux de bord et optimisation des processus décisionnels." },
+        { title: "Autres expériences", detail: "Animateur (Juil. 2025), Manager en restauration (Sept. 2025), Bénévolat (2023)." }
+      ],
+      contact: {
+        email: "yanis783@outlook.fr",
+        phone: "07 69 44 74 95",
+        location: "Poissy (Yvelines)",
+        permits: "Permis B, Permis A2"
+      }
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    $("nameNav").textContent = profile.name;
+    $("headline").textContent = profile.headline;
+    $("title").textContent = profile.title;
+    $("intro").textContent = profile.intro;
+    const fallbackPhoto = "data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'><rect width='240' height='240' fill='#1a2545'/><circle cx='120' cy='92' r='46' fill='#2fd4a2'/><rect x='54' y='150' width='132' height='56' rx='28' fill='#2fd4a2'/><text x='120' y='228' text-anchor='middle' fill='#ecf0ff' font-family='Arial' font-size='20'>Yanis Dhaime</text></svg>`);
+    const heroPhoto = $("heroPhoto");
+    heroPhoto.src = profile.photoUrl;
+    heroPhoto.onerror = () => { heroPhoto.src = fallbackPhoto; };
+    $("cvBtn").href = profile.cvUrl;
+    $("linkedinBtn").href = profile.linkedinUrl;
+
+    $("dashboardMetrics").innerHTML = profile.dashboard.metrics
+      .map((m) => `<div class="dashboard-item"><div class="value">${m.value}</div><div class="label">${m.label}</div></div>`)
+      .join("");
+
+    $("interests").innerHTML = profile.interests.map((v) => `<li>${v}</li>`).join("");
+    $("languages").innerHTML = profile.languages.map((v) => `<li>${v}</li>`).join("");
+    $("goalsText").textContent = profile.goalsText;
+    $("personalPresentation").textContent = profile.personalPresentation;
+    $("whyDataScience").textContent = profile.whyDataScience;
+    $("competenceText").textContent = profile.competenceText;
+    $("qualitiesText").textContent = profile.qualitiesText;
+    const renderSkillList = (id, items) => {
+      $(id).innerHTML = items.map((item) => `<li><span class="skill-icon">${item.icon}</span><span>${item.label}</span></li>`).join("");
+    };
+    renderSkillList("skillsProgramming", profile.skills.programming);
+    renderSkillList("skillsBiData", profile.skills.biData);
+    renderSkillList("skillsOffice", profile.skills.office);
+    renderSkillList("skillsMethods", profile.skills.methods);
+
+    $("projects").innerHTML = profile.projects
+      .map(
+        (p) => `
+        <article class="card project">
+          <h3>${p.title}</h3>
+          <p>${p.description}</p>
+          <div class="tags">${p.tags.map((t) => `<span class="tag">${t}</span>`).join("")}</div>
+          <a class="btn" href="${p.link}">Voir le projet</a>
+        </article>`
+      )
+      .join("");
+
+    $("experience").innerHTML = profile.experience
+      .map((item) => `<article class="card"><h3>${item.title}</h3><p>${item.detail}</p></article>`)
+      .join("");
+
+    $("email").textContent = profile.contact.email;
+    $("phone").textContent = profile.contact.phone;
+    $("location").textContent = profile.contact.location;
+    $("permits").textContent = profile.contact.permits;
+    $("copyright").textContent = `© ${new Date().getFullYear()} ${profile.name} — Portfolio.`;
+  </script>
+</body>
+</html>
+</html>
