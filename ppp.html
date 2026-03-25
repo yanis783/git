@@ -23,7 +23,7 @@
       margin: 0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       color: var(--text);
-      background: radial-gradient(circle at top right, #1a2550 0%, var(--bg) 45%);
+      background: radial-gradient(circle at 82% 12%, rgba(35, 225, 170, 0.22), transparent 34%), radial-gradient(circle at 8% 85%, rgba(71, 169, 255, 0.18), transparent 36%), #070d1a;
       line-height: 1.5;
     }
     .container { width: min(1080px, 92%); margin: 0 auto; }
@@ -42,16 +42,6 @@
     .links a:hover { color: var(--text); }
 
     .hero { padding: 4rem 0 2.5rem; display: grid; gap: 2rem; grid-template-columns: 1.2fr 1fr; align-items: start; }
-
-    .hero-photo {
-      width: 120px;
-      height: 120px;
-      border-radius: 18px;
-      object-fit: cover;
-      border: 2px solid var(--border);
-      margin-bottom: 0.8rem;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.3);
-    }
     .pill {
       display: inline-block; border: 1px solid var(--border); border-radius: 999px;
       color: var(--muted); padding: 0.35rem 0.8rem; font-size: 0.85rem;
@@ -66,20 +56,28 @@
       display: inline-block;
       background: #182142;
     }
-    .btn.primary { background: linear-gradient(95deg, var(--accent-2), #5acbff); color: #040814; border: 0; font-weight: 700; }
+    .btn.primary { background: linear-gradient(95deg, #2de6b7, #57b8ff); color: #05101d; border: 0; font-weight: 700; box-shadow: 0 10px 26px rgba(44, 214, 176, 0.35); }
 
     .dashboard {
       align-self: start;
-      background: color-mix(in oklab, var(--card) 90%, black);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1rem 1.1rem 1.2rem;
+      background: #111b33;
+      border: 1px solid #263d69;
+      border-radius: 18px;
+      padding: 1.05rem;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.32);
     }
-    .dashboard h3 { margin: 0 0 0.8rem; font-size: 1.1rem; }
-    .dashboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; }
-    .dashboard-item { padding: 0.55rem; border: 1px solid var(--border); border-radius: 10px; background: #101a33; }
-    .dashboard-item .value { font-size: 1.2rem; font-weight: 700; color: #3de6ba; }
-    .dashboard-item .label { color: var(--muted); font-size: 0.82rem; }
+    .dashboard h3 { margin: 0; font-size: 1.35rem; }
+    .dashboard-head { display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.8rem; }
+    .dashboard-dot { width: 10px; height: 10px; border-radius: 50%; background: #2de6b7; box-shadow: 0 0 14px #2de6b7; }
+    .dashboard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 0.75rem 0 0.8rem; }
+    .dashboard-item { padding: 0.4rem 0; border-top: 1px solid #263d69; }
+    .dashboard-item .value { font-size: 2rem; font-weight: 700; color: #33e8bc; line-height: 1; }
+    .dashboard-item .label { color: #c1cae0; font-size: 0.95rem; }
+    .dashboard-item .delta { font-size: 0.84rem; margin-top: 0.2rem; display: block; }
+    .delta.up { color: #2de6b7; }
+    .delta.down { color: #ff5f6d; }
+    .bars { height: 120px; display: flex; gap: 0.55rem; align-items: flex-end; }
+    .bar { flex: 1; background: linear-gradient(180deg, #47f0c7, #2fd4a2); border-radius: 6px 6px 0 0; }
     .card {
       background: color-mix(in oklab, var(--card) 88%, black);
       border: 1px solid var(--border);
@@ -146,7 +144,6 @@
 
   <header class="container hero">
     <div>
-      <img class="hero-photo" id="heroPhoto" src="" alt="Photo de Yanis Dhaime" />
       <span class="pill" id="headline">Ton métier / statut</span>
       <h1 id="title">Data. Analytics. Engineering.</h1>
       <p class="subtitle" id="intro">Présente ici qui tu es en 2-3 lignes: ton profil, ta spécialité et ce que tu recherches.</p>
@@ -157,8 +154,9 @@
       </div>
     </div>
     <aside class="dashboard">
-      <h3>Compétences clés</h3>
+      <div class="dashboard-head"><span class="dashboard-dot"></span><h3>Dashboard Analytique</h3></div>
       <div class="dashboard-grid" id="dashboardMetrics"></div>
+      <div class="bars" id="dashboardBars"></div>
     </aside>
   </header>
 
@@ -259,16 +257,15 @@
       headline: "Étudiant en BUT Data Science · 20 ans",
       title: "Data. \nAnalytics.\nEngineering.",
       intro: "Étudiant en sciences des données, je transforme les données en informations utiles pour comprendre, analyser et décider.",
-      photoUrl: "yanis-photo.jpg",
       cvUrl: "#",
       linkedinUrl: "https://www.linkedin.com/in/yanis-dhaime-3b4a80296",
       dashboard: {
         metrics: [
-          { value: "85%", label: "Python / SQL" },
-          { value: "78%", label: "Statistiques" },
-          { value: "82%", label: "DataViz / BI" },
-          { value: "80%", label: "Communication" }
+          { value: "87%", label: "Conversion", delta: "▲ 12%", trend: "up" },
+          { value: "42K", label: "Utilisateurs", delta: "▲ 5%", trend: "up" },
+          { value: "3.2s", label: "Temps moyen", delta: "▼ 8%", trend: "down" }
         ],
+        bars: [58, 74, 66, 84, 78, 90, 63]
       },
       interests: ["Sport", "Voyages", "Technologie"],
       goalsText: `Mon objectif est de travailler plus tard dans le domaine de la science des données, par exemple comme data analyst ou data scientist. Ce qui m’intéresse dans ces métiers, c’est le fait d’analyser des données pour mieux comprendre une situation et aider les entreprises à prendre de bonnes décisions.
@@ -354,15 +351,14 @@ Ces expériences m’ont permis de développer des qualités utiles aussi bien d
     $("headline").textContent = profile.headline;
     $("title").textContent = profile.title;
     $("intro").textContent = profile.intro;
-    const fallbackPhoto = "data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'><rect width='240' height='240' fill='#1a2545'/><circle cx='120' cy='92' r='46' fill='#2fd4a2'/><rect x='54' y='150' width='132' height='56' rx='28' fill='#2fd4a2'/><text x='120' y='228' text-anchor='middle' fill='#ecf0ff' font-family='Arial' font-size='20'>Yanis Dhaime</text></svg>`);
-    const heroPhoto = $("heroPhoto");
-    heroPhoto.src = profile.photoUrl;
-    heroPhoto.onerror = () => { heroPhoto.src = fallbackPhoto; };
     $("cvBtn").href = profile.cvUrl;
     $("linkedinBtn").href = profile.linkedinUrl;
 
     $("dashboardMetrics").innerHTML = profile.dashboard.metrics
-      .map((m) => `<div class="dashboard-item"><div class="value">${m.value}</div><div class="label">${m.label}</div></div>`)
+      .map((m) => `<div class="dashboard-item"><div class="value">${m.value}</div><div class="label">${m.label}</div><span class="delta ${m.trend}">${m.delta}</span></div>`)
+      .join("");
+    $("dashboardBars").innerHTML = profile.dashboard.bars
+      .map((h) => `<div class="bar" style="height:${h}%"></div>`)
       .join("");
 
     $("interests").innerHTML = profile.interests.map((v) => `<li>${v}</li>`).join("");
